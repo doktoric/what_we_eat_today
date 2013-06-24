@@ -1,9 +1,6 @@
 package com.acme.doktorics.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -23,6 +20,8 @@ public class DailyMenu {
     public String appetizer;
     public String mainDish;
     public String dessert;
+    @ManyToOne
+    private AbstractRestaurant restaurant;
 
     public DailyMenu() {
     }
@@ -70,12 +69,20 @@ public class DailyMenu {
         return mainDish;
     }
 
+    public AbstractRestaurant getAbstractRestaurant() {
+        return restaurant;
+    }
+
     public String getDessert() {
         return dessert;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public void setAbstractRestaurant(AbstractRestaurant restaurant) {
+        this.restaurant=restaurant;
     }
 
     public Long getId() {

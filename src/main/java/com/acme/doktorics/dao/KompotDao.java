@@ -1,6 +1,7 @@
 package com.acme.doktorics.dao;
 
 import com.acme.doktorics.domain.KompotRestaurant;
+import org.springframework.stereotype.Repository;
 
 /**
  * Created with IntelliJ IDEA.
@@ -9,7 +10,7 @@ import com.acme.doktorics.domain.KompotRestaurant;
  * Time: 20:56
  * To change this template use File | Settings | File Templates.
  */
-//@Repository
+@Repository
 public class KompotDao extends AbstractJpaDAO<KompotRestaurant> implements IKompotDao {
     public KompotDao() {
         setClazz(KompotRestaurant.class);

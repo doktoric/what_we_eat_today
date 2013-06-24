@@ -14,7 +14,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "kompot")
-public class KompotRestaurant {
+public class KompotRestaurant extends AbstractRestaurant {
     @Id
     @GeneratedValue
     private Long id;

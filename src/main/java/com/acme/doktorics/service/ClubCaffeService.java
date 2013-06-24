@@ -3,6 +3,8 @@ package com.acme.doktorics.service;
 import com.acme.doktorics.dao.IClubCaffeDao;
 import com.acme.doktorics.domain.ClubCaffeRestaurant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,8 +15,8 @@ import java.util.List;
  * Time: 21:17
  * To change this template use File | Settings | File Templates.
  */
-//@Service
-//@Transactional
+@Service
+@Transactional
 public class ClubCaffeService implements IClubCaffeService {
 
     @Autowired

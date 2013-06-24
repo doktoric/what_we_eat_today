@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "fiktiv")
-public class FiktivRestaurant {
+public class FiktivRestaurant extends AbstractRestaurant{
     @Id
     @GeneratedValue
     private Long id;

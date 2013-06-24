@@ -14,7 +14,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "tenminutes")
-public class TenMinutesRestaurant {
+public class TenMinutesRestaurant extends AbstractRestaurant{
 
     @Id
     @GeneratedValue

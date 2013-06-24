@@ -2,8 +2,10 @@ package com.acme.doktorics.controller;
 
 import com.acme.doktorics.domain.*;
 import com.acme.doktorics.parser.*;
+import com.acme.doktorics.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,18 @@ import java.util.List;
 public class HomeController {
 
 
+    @Autowired
+    private IFiktivService fiktivService;
+    @Autowired
+    private IKompotService kompotService;
+    @Autowired
+    private IClubCaffeService clubCaffeService;
+    @Autowired
+    private IStexService stexService;
+    @Autowired
+    private ITenMinutesService tenMinutesService;
+
+
     BaseRestaurantParser fiktivParser = new FiktivParser();
     BaseRestaurantParser clubCaffeParser = new ClubCaffeParser();
     BaseRestaurantParser kompotParser = new KompotParser();
@@ -27,21 +41,20 @@ public class HomeController {
     BaseRestaurantParser tenMinutesParser = new TenMinutesParser();
 
 
-
-
     private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
     /**
      * Simply selects the home view to render by returning its name.
      */
-
     @RequestMapping(method = RequestMethod.GET)
-    public String home(Model model) {
-        logger.info("DSFSDFDSFSDFSDFSDF");
+    public String home(Model model) throws IOException {
+        logger.info("Start webapp");
+        fiktivService.saveRestaurant(testFiktiv());
+        stexService.saveRestaurant(testStex());
+        tenMinutesService.saveRestaurant(testTenMinutes());
+        kompotService.saveRestaurant(testKompot());
         return "home";
     }
-
-
 
     public FiktivRestaurant testFiktiv() throws IOException {
         List<DailyMenu> menus = (List<DailyMenu>) fiktivParser.getMenu();

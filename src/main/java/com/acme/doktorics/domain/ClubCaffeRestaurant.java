@@ -14,11 +14,11 @@ import java.util.List;
  */
 @Entity
 @Table(name = "clubcaffe")
-public class ClubCaffeRestaurant {
+public class ClubCaffeRestaurant extends AbstractRestaurant{
     @Id
     @GeneratedValue
     private Long id;
-    @OneToMany
+    @OneToMany(mappedBy = "menu", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<DailyMenu> menu;
 
     public ClubCaffeRestaurant() {

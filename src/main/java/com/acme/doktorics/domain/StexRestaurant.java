@@ -14,7 +14,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "stex")
-public class StexRestaurant {
+public class StexRestaurant extends AbstractRestaurant{
 
     @Id
     @GeneratedValue
