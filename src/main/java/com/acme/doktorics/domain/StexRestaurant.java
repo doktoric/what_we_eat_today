@@ -13,13 +13,10 @@ import java.util.List;
  */
 
 @Entity
-@Table(name = "stex")
 public class StexRestaurant extends AbstractRestaurant{
 
-    @Id
-    @GeneratedValue
-    private Long id;
-    @OneToMany
+
+    @OneToMany  (mappedBy = "restaurant", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<DailyMenu> menu;
 
     public StexRestaurant() {
@@ -42,11 +39,5 @@ public class StexRestaurant extends AbstractRestaurant{
         return menu;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public Long getId() {
-        return id;
-    }
 }

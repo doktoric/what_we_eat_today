@@ -13,12 +13,9 @@ import java.util.List;
  */
 
 @Entity
-@Table(name = "kompot")
 public class KompotRestaurant extends AbstractRestaurant {
-    @Id
-    @GeneratedValue
-    private Long id;
-    @OneToMany
+
+    @OneToMany(mappedBy = "restaurant", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<DailyMenu> menu;
 
     public KompotRestaurant() {
@@ -40,11 +37,5 @@ public class KompotRestaurant extends AbstractRestaurant {
     public List<DailyMenu> getMenu() {
         return menu;
     }
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public Long getId() {
-        return id;
-    }
 }

@@ -1,8 +1,6 @@
 package com.acme.doktorics.domain;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -13,15 +11,9 @@ import javax.persistence.Table;
  * To change this template use File | Settings | File Templates.
  */
 @Entity
-@Table(name = "tenminutes")
-public class TenMinutesRestaurant extends AbstractRestaurant{
-
-    @Id
-    @GeneratedValue
-    private Long id;
+public class TenMinutesRestaurant extends AbstractRestaurant {
 
     private byte[] menu;
-
 
     public TenMinutesRestaurant() {
         this.menu = new byte[1];
@@ -39,11 +31,4 @@ public class TenMinutesRestaurant extends AbstractRestaurant{
         return menu;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
 }

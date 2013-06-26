@@ -16,12 +16,13 @@ public class DailyMenu {
     @Id
     @GeneratedValue
     private Long id;
-    public String day;
-    public String appetizer;
-    public String mainDish;
-    public String dessert;
-    @ManyToOne
-    private AbstractRestaurant restaurant;
+    private String day;
+    private String appetizer;
+    private String mainDish;
+    private String dessert;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "menu_id")
+    public AbstractRestaurant restaurant;
 
     public DailyMenu() {
     }
@@ -69,9 +70,6 @@ public class DailyMenu {
         return mainDish;
     }
 
-    public AbstractRestaurant getAbstractRestaurant() {
-        return restaurant;
-    }
 
     public String getDessert() {
         return dessert;
@@ -81,12 +79,17 @@ public class DailyMenu {
         this.id = id;
     }
 
-    public void setAbstractRestaurant(AbstractRestaurant restaurant) {
-        this.restaurant=restaurant;
-    }
 
     public Long getId() {
         return id;
+    }
+
+    public void setRestaurant(AbstractRestaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
+    public AbstractRestaurant getRestaurant() {
+        return restaurant;
     }
 
     @Override

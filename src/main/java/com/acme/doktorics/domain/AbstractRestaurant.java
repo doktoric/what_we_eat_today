@@ -1,8 +1,6 @@
 package com.acme.doktorics.domain;
 
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
+import javax.persistence.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,8 +9,20 @@ import javax.persistence.Inheritance;
  * Time: 0:05
  * To change this template use File | Settings | File Templates.
  */
-@Entity
-@Inheritance
-@DiscriminatorColumn(name="REF_TYPE")
+
+
+@MappedSuperclass
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract  class AbstractRestaurant {
+    @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    private Long id;
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
 }
