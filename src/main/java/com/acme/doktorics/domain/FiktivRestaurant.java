@@ -12,9 +12,11 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 @Entity
+@Table(name = "fiktiv")
 public class FiktivRestaurant extends AbstractRestaurant {
 
-    @OneToMany(mappedBy = "restaurant", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    //@OneToMany( fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(  cascade = CascadeType.ALL)
     private List<DailyMenu> menu;
 
     public FiktivRestaurant() {

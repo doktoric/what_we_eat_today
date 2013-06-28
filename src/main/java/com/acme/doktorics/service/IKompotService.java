@@ -1,5 +1,6 @@
 package com.acme.doktorics.service;
 
+import com.acme.doktorics.domain.ClubCaffeRestaurant;
 import com.acme.doktorics.domain.KompotRestaurant;
 
 import java.util.List;
@@ -15,7 +16,11 @@ public interface IKompotService {
 
     List<KompotRestaurant> find();
 
+    KompotRestaurant findOne();
+
     void deleteRestaurant(String id);
 
     void saveRestaurant(KompotRestaurant restaurant);
+
+    void truncate();
 }

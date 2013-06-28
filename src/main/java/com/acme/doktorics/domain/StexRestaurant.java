@@ -13,10 +13,11 @@ import java.util.List;
  */
 
 @Entity
+@Table(name = "stex")
 public class StexRestaurant extends AbstractRestaurant{
 
-
-    @OneToMany  (mappedBy = "restaurant", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+   // @OneToMany  ( fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany  ( cascade = CascadeType.ALL)
     private List<DailyMenu> menu;
 
     public StexRestaurant() {

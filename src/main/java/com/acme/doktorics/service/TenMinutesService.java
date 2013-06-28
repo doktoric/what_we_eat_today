@@ -29,6 +29,16 @@ public class TenMinutesService implements ITenMinutesService {
     }
 
     @Override
+    public TenMinutesRestaurant findOne() {
+        return tenMinutesDao.findOne();
+    }
+
+    @Override
+    public void truncate() {
+        tenMinutesDao.truncate();
+    }
+
+    @Override
     public void deleteRestaurant(String id) {
         TenMinutesRestaurant restaurant = tenMinutesDao.findOne(id);
         tenMinutesDao.delete(restaurant);

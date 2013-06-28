@@ -38,16 +38,19 @@
             <li><a class="rest-tab" href="#fiktiv" data-toggle="tab">Fiktív</a></li>
             <li><a class="rest-tab" href="#klubcaffe" data-toggle="tab">Klub Caffe</a></li>
             <li><a class="rest-tab" href="#tenminutes" data-toggle="tab">Ten Minutes</a></li>
+            <li><a class="rest-tab" href="#stex" data-toggle="tab">Stex</a></li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="kompot">
                 <div class="page-header">
                     <h1>Kompót étlap</h1>
+                    ${kompot}
                 </div>
             </div>
             <div class="tab-pane" id="fiktiv">
                 <div class="page-header">
                     <h1>Fiktív étlap</h1>
+                    ${fiktiv}
                 </div>
             </div>
             <div class="tab-pane" id="klubcaffe">
@@ -58,6 +61,13 @@
             <div class="tab-pane" id="tenminutes">
                 <div class="page-header">
                     <h1>Ten Minutes étlap</h1>
+                    ${tenminutes}
+                </div>
+            </div>
+            <div class="tab-pane active" id="stex">
+                <div class="page-header">
+                    <h1>Stex étlap</h1>
+                    ${stex}
                 </div>
             </div>
         </div>

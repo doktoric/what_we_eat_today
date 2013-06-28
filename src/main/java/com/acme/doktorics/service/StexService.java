@@ -29,6 +29,16 @@ public class StexService implements IStexService {
     }
 
     @Override
+    public StexRestaurant findOne() {
+        return stexDao.findOne();
+    }
+
+    @Override
+    public void truncate() {
+        stexDao.truncate();
+    }
+
+    @Override
     public void deleteRestaurant(String id) {
         StexRestaurant restaurant = stexDao.findOne(id);
         stexDao.delete(restaurant);

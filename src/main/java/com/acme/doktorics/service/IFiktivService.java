@@ -1,5 +1,6 @@
 package com.acme.doktorics.service;
 
+import com.acme.doktorics.domain.ClubCaffeRestaurant;
 import com.acme.doktorics.domain.FiktivRestaurant;
 
 import java.util.List;
@@ -15,7 +16,11 @@ public interface IFiktivService {
 
     List<FiktivRestaurant> find();
 
+    FiktivRestaurant findOne();
+
     void deleteRestaurant(String id);
 
     void saveRestaurant(FiktivRestaurant restaurant);
+
+    void truncate();
 }

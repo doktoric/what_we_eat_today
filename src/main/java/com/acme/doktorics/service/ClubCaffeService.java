@@ -29,6 +29,16 @@ public class ClubCaffeService implements IClubCaffeService {
     }
 
     @Override
+    public ClubCaffeRestaurant findOne() {
+        return clubCaffeDao.findOne();
+    }
+
+    @Override
+    public void truncate() {
+        clubCaffeDao.truncate();
+    }
+
+    @Override
     public void deleteRestaurant(String id) {
         ClubCaffeRestaurant restaurant = clubCaffeDao.findOne(id);
         clubCaffeDao.delete(restaurant);

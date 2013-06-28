@@ -15,7 +15,11 @@ public interface IClubCaffeService {
 
     List<ClubCaffeRestaurant> find();
 
+    ClubCaffeRestaurant findOne();
+
     void deleteRestaurant(String id);
 
     void saveRestaurant(ClubCaffeRestaurant restaurant);
+
+    void truncate();
 }

@@ -1,6 +1,7 @@
 package com.acme.doktorics.service;
 
 import com.acme.doktorics.dao.IFiktivDao;
+import com.acme.doktorics.domain.ClubCaffeRestaurant;
 import com.acme.doktorics.domain.FiktivRestaurant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,16 @@ public class FiktivService implements IFiktivService {
     public List<FiktivRestaurant> find() {
         List<FiktivRestaurant> restaurants = fiktivDao.findAll();
         return restaurants;
+    }
+
+    @Override
+    public FiktivRestaurant findOne() {
+        return fiktivDao.findOne();
+    }
+
+    @Override
+    public void truncate() {
+        fiktivDao.truncate();
     }
 
     @Override

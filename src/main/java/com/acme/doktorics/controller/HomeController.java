@@ -49,14 +49,20 @@ public class HomeController {
     @RequestMapping(method = RequestMethod.GET)
     public String home(Model model) throws IOException {
         logger.info("Start webapp");
-        fiktivService.saveRestaurant(testFiktiv());
-        stexService.saveRestaurant(testStex());
-        tenMinutesService.saveRestaurant(testTenMinutes());
-        kompotService.saveRestaurant(testKompot());
+
+        model.addAttribute("fiktiv",fiktivService.findOne());
+        model.addAttribute("stex",stexService.findOne());
+        model.addAttribute("tenminutes",tenMinutesService.findOne());
+        model.addAttribute("kompot",kompotService.findOne());
+        //fiktivService.saveRestaurant(testFiktiv());
+        //stexService.saveRestaurant(testStex());
+        //tenMinutesService.saveRestaurant(testTenMinutes());
+        //kompotService.saveRestaurant(testKompot());
         return "home";
     }
 
     public FiktivRestaurant testFiktiv() throws IOException {
+        fiktivService.truncate();
         List<DailyMenu> menus = (List<DailyMenu>) fiktivParser.getMenu();
         for (DailyMenu menu : menus) {
             System.out.println(menu.toString());
@@ -65,6 +71,7 @@ public class HomeController {
     }
 
     public StexRestaurant testStex() throws IOException {
+        stexService.truncate();
         List<DailyMenu> menus = (List<DailyMenu>) stexParser.getMenu();
         for (DailyMenu menu : menus) {
             System.out.println(menu.toString());
@@ -73,12 +80,14 @@ public class HomeController {
     }
 
     public TenMinutesRestaurant testTenMinutes() throws IOException {
+        tenMinutesService.truncate();
         byte[] menus = (byte[]) tenMinutesParser.getMenu();
         System.out.println(menus);
         return new TenMinutesRestaurant(menus);
     }
 
     public KompotRestaurant testKompot() throws IOException {
+        kompotService.truncate();
         List<DailyMenu> menus = (List<DailyMenu>) kompotParser.getMenu();
         for (DailyMenu menu : menus) {
             System.out.println(menu.toString());

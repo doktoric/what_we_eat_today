@@ -1,6 +1,7 @@
 package com.acme.doktorics.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 /**
@@ -11,8 +12,10 @@ import javax.persistence.Table;
  * To change this template use File | Settings | File Templates.
  */
 @Entity
+@Table(name = "tenminutes")
 public class TenMinutesRestaurant extends AbstractRestaurant {
 
+    @Lob
     private byte[] menu;
 
     public TenMinutesRestaurant() {

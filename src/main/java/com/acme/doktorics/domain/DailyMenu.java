@@ -20,9 +20,9 @@ public class DailyMenu {
     private String appetizer;
     private String mainDish;
     private String dessert;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "menu_id")
-    public AbstractRestaurant restaurant;
+    //@ManyToOne(fetch = FetchType.LAZY)
+    //@JoinColumn(name = "menu_id")
+    //public AbstractRestaurant restaurant;
 
     public DailyMenu() {
     }
@@ -84,13 +84,13 @@ public class DailyMenu {
         return id;
     }
 
-    public void setRestaurant(AbstractRestaurant restaurant) {
-        this.restaurant = restaurant;
-    }
+   // public void setRestaurant(AbstractRestaurant restaurant) {
+     //   this.restaurant = restaurant;
+    //}
 
-    public AbstractRestaurant getRestaurant() {
-        return restaurant;
-    }
+   // public AbstractRestaurant getRestaurant() {
+    //    return restaurant;
+    //}
 
     @Override
     public String toString() {

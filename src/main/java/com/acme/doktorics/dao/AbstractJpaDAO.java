@@ -35,6 +35,11 @@ public class AbstractJpaDAO<T> implements IAbstractJpaDAO<T> {
     }
 
     @Override
+    public T findOne() {
+        return findAll().get(0);
+    }
+
+    @Override
     public void save(final T entity) {
         entityManager.persist(entity);
     }
@@ -47,6 +52,13 @@ public class AbstractJpaDAO<T> implements IAbstractJpaDAO<T> {
     @Override
     public void delete(final T entity) {
         entityManager.remove(entity);
+    }
+
+    @Override
+    public void truncate() {
+        for(T t: findAll()){
+            delete(t);
+        }
     }
 
 }

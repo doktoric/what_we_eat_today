@@ -11,6 +11,8 @@ public interface IAbstractJpaDAO<T> {
 
     T findOne(final String id);
 
+    T findOne();
+
     List<T> findAll();
 
     void save(final T entity);
@@ -18,5 +20,7 @@ public interface IAbstractJpaDAO<T> {
     void update(final T entity);
 
     void delete(final T entity);
+
+    void truncate();
 
 }

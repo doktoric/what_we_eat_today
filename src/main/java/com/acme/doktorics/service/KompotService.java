@@ -29,6 +29,11 @@ public class KompotService implements IKompotService {
     }
 
     @Override
+    public KompotRestaurant findOne() {
+        return kompotDao.findOne();
+    }
+
+    @Override
     public void deleteRestaurant(String id) {
         KompotRestaurant restaurant = kompotDao.findOne(id);
         kompotDao.delete(restaurant);
@@ -37,5 +42,10 @@ public class KompotService implements IKompotService {
     @Override
     public void saveRestaurant(KompotRestaurant restaurant) {
         kompotDao.save(restaurant);
+    }
+
+    @Override
+    public void truncate() {
+        kompotDao.truncate();
     }
 }

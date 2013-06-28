@@ -13,9 +13,11 @@ import java.util.List;
  */
 
 @Entity
+@Table(name = "kompot")
 public class KompotRestaurant extends AbstractRestaurant {
 
-    @OneToMany(mappedBy = "restaurant", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    //@OneToMany( fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(  cascade = CascadeType.ALL)
     private List<DailyMenu> menu;
 
     public KompotRestaurant() {
