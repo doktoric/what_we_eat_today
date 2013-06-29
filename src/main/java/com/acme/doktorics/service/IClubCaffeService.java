@@ -1,6 +1,7 @@
 package com.acme.doktorics.service;
 
 import com.acme.doktorics.domain.ClubCaffeRestaurant;
+import com.acme.doktorics.domain.DailyMenu;
 
 import java.util.List;
 
@@ -16,6 +17,8 @@ public interface IClubCaffeService {
     List<ClubCaffeRestaurant> find();
 
     ClubCaffeRestaurant findOne();
+
+    List<DailyMenu> getMenu();
 
     void deleteRestaurant(String id);
 

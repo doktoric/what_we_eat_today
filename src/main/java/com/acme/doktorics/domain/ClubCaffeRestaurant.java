@@ -18,7 +18,7 @@ public class ClubCaffeRestaurant extends AbstractRestaurant{
 
   //  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   @OneToMany(cascade = CascadeType.ALL)
-    private List<DailyMenu> menu;
+  private List<DailyMenu> menu;
 
     public ClubCaffeRestaurant() {
         this.menu = new ArrayList<DailyMenu>();

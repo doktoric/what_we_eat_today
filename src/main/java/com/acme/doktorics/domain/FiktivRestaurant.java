@@ -16,7 +16,7 @@ import java.util.List;
 public class FiktivRestaurant extends AbstractRestaurant {
 
     //@OneToMany( fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @OneToMany(  cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<DailyMenu> menu;
 
     public FiktivRestaurant() {

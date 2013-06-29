@@ -17,7 +17,7 @@ import java.util.List;
 public class KompotRestaurant extends AbstractRestaurant {
 
     //@OneToMany( fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @OneToMany(  cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<DailyMenu> menu;
 
     public KompotRestaurant() {

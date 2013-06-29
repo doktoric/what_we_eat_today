@@ -1,6 +1,7 @@
 package com.acme.doktorics.service;
 
 import com.acme.doktorics.domain.ClubCaffeRestaurant;
+import com.acme.doktorics.domain.DailyMenu;
 import com.acme.doktorics.domain.StexRestaurant;
 
 import java.util.List;
@@ -17,6 +18,8 @@ public interface IStexService {
     List<StexRestaurant> find();
 
     StexRestaurant findOne();
+
+    List<DailyMenu> getMenu();
 
     void deleteRestaurant(String id);
 

@@ -2,6 +2,9 @@ package com.acme.doktorics.service;
 
 import com.acme.doktorics.dao.IClubCaffeDao;
 import com.acme.doktorics.domain.ClubCaffeRestaurant;
+import com.acme.doktorics.domain.DailyMenu;
+import com.acme.doktorics.domain.FiktivRestaurant;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +34,13 @@ public class ClubCaffeService implements IClubCaffeService {
     @Override
     public ClubCaffeRestaurant findOne() {
         return clubCaffeDao.findOne();
+    }
+
+    @Override
+    public List<DailyMenu> getMenu() {
+        ClubCaffeRestaurant clubcaffe=findOne();
+        Hibernate.initialize(clubcaffe.getMenu());
+        return clubcaffe.getMenu();
     }
 
     @Override

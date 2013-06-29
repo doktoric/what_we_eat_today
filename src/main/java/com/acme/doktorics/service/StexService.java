@@ -1,7 +1,10 @@
 package com.acme.doktorics.service;
 
 import com.acme.doktorics.dao.IStexDao;
+import com.acme.doktorics.domain.DailyMenu;
+import com.acme.doktorics.domain.FiktivRestaurant;
 import com.acme.doktorics.domain.StexRestaurant;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +34,13 @@ public class StexService implements IStexService {
     @Override
     public StexRestaurant findOne() {
         return stexDao.findOne();
+    }
+
+    @Override
+    public List<DailyMenu> getMenu() {
+        StexRestaurant stex=findOne();
+        Hibernate.initialize(stex.getMenu());
+        return stex.getMenu();
     }
 
     @Override

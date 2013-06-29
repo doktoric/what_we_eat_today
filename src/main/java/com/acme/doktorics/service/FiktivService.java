@@ -2,7 +2,9 @@ package com.acme.doktorics.service;
 
 import com.acme.doktorics.dao.IFiktivDao;
 import com.acme.doktorics.domain.ClubCaffeRestaurant;
+import com.acme.doktorics.domain.DailyMenu;
 import com.acme.doktorics.domain.FiktivRestaurant;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,6 +34,13 @@ public class FiktivService implements IFiktivService {
     @Override
     public FiktivRestaurant findOne() {
         return fiktivDao.findOne();
+    }
+
+    @Override
+    public List<DailyMenu> getMenu() {
+        FiktivRestaurant fiktiv=findOne();
+        Hibernate.initialize(fiktiv.getMenu());
+        return fiktiv.getMenu();
     }
 
     @Override

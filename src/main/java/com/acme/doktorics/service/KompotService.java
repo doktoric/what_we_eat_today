@@ -1,7 +1,10 @@
 package com.acme.doktorics.service;
 
 import com.acme.doktorics.dao.IKompotDao;
+import com.acme.doktorics.domain.DailyMenu;
+import com.acme.doktorics.domain.FiktivRestaurant;
 import com.acme.doktorics.domain.KompotRestaurant;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +34,13 @@ public class KompotService implements IKompotService {
     @Override
     public KompotRestaurant findOne() {
         return kompotDao.findOne();
+    }
+
+    @Override
+    public List<DailyMenu> getMenu() {
+        KompotRestaurant kompot=findOne();
+        Hibernate.initialize(kompot.getMenu());
+        return kompot.getMenu();
     }
 
     @Override

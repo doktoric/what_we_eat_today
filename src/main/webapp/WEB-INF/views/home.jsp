@@ -1,13 +1,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-
+<%@page contentType="text/html;charset=UTF-8" %>
 
 <c:url value="/resources" var="resource"/>
 <c:url value="/resources/bootstrap" var="bootstrap"/>
 
 <html>
 <head>
-    <link rel="shortcut icon" type="image/x-icon" href="${resource}/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="${resource}/favicon.ico"/>
     <meta charset="utf-8">
     <title>What we eat today</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,9 +18,10 @@
     <link href="${bootstrap}/css/bootstrap-responsive.css" rel="stylesheet">
     <link href="${bootstrap}/css/bootstrap-docs.css" rel="stylesheet">
     <link href="${bootstrap}/css/prettify.css" rel="stylesheet">
-    <link href="${resource}/css/flat-ui.css" rel="stylesheet">
     <style type="text/css">
-        .rest-tab {text-decoration: none !important;}
+        .rest-tab {
+            text-decoration: none !important;
+        }
     </style>
 </head>
 <body data-twttr-rendered="true" style="padding-top: 0px;">
@@ -34,7 +35,7 @@
 <div class="container" style="padding-top: 30px;">
     <div class="tabbable tabs-left">
         <ul class="nav nav-tabs">
-            <li class="active" ><a class="rest-tab" href="#kompot" data-toggle="tab">Kompót</a></li>
+            <li class="active"><a class="rest-tab" href="#kompot" data-toggle="tab">Kompót</a></li>
             <li><a class="rest-tab" href="#fiktiv" data-toggle="tab">Fiktív</a></li>
             <li><a class="rest-tab" href="#klubcaffe" data-toggle="tab">Klub Caffe</a></li>
             <li><a class="rest-tab" href="#tenminutes" data-toggle="tab">Ten Minutes</a></li>
@@ -44,13 +45,51 @@
             <div class="tab-pane active" id="kompot">
                 <div class="page-header">
                     <h1>Kompót étlap</h1>
-                    ${kompot}
+                    <c:forEach var="item" items="${kompot}">
+                        <div class="alert alert-info">
+                            <strong><c:out value="${item.day}"/></strong>
+                            <c:if test="${not empty item.appetizer}">
+                                <p>
+                                    <c:out value="${item.appetizer}"/>
+                                </p>
+                            </c:if>
+                            <c:if test="${not empty item.mainDish}">
+                                <p>
+                                    <c:out value="${item.mainDish}"/>
+                                </p>
+                            </c:if>
+                            <c:if test="${not empty item.dessert}">
+                                <p>
+                                    <c:out value="${item.dessert}"/>
+                                </p>
+                            </c:if>
+                        </div>
+                    </c:forEach>
                 </div>
             </div>
             <div class="tab-pane" id="fiktiv">
                 <div class="page-header">
                     <h1>Fiktív étlap</h1>
-                    ${fiktiv}
+                    <c:forEach var="item" items="${fiktiv}">
+                        <div class="alert alert-info">
+                            <strong><c:out value="${item.day}"/></strong>
+                            <c:if test="${not empty item.appetizer}">
+                                <p>
+                                    <c:out value="${item.appetizer}"/>
+                                </p>
+                            </c:if>
+                            <c:if test="${not empty item.mainDish}">
+                                <p>
+                                    <c:out value="${item.mainDish}"/>
+                                </p>
+                            </c:if>
+                            <c:if test="${not empty item.dessert}">
+                                <p>
+                                    <c:out value="${item.dessert}"/>
+                                </p>
+                            </c:if>
+                        </div>
+                    </c:forEach>
                 </div>
             </div>
             <div class="tab-pane" id="klubcaffe">
@@ -61,13 +100,33 @@
             <div class="tab-pane" id="tenminutes">
                 <div class="page-header">
                     <h1>Ten Minutes étlap</h1>
-                    ${tenminutes}
+                    <img src="data:image/gif;base64,${tenminutes}" alt="test"/>
+
                 </div>
             </div>
-            <div class="tab-pane active" id="stex">
+            <div class="tab-pane" id="stex">
                 <div class="page-header">
                     <h1>Stex étlap</h1>
-                    ${stex}
+                    <c:forEach var="item" items="${stex}">
+                        <div class="alert alert-info">
+                            <strong><c:out value="${item.day}"/></strong>
+                            <c:if test="${not empty item.appetizer}">
+                                <p>
+                                    <c:out value="${item.appetizer}"/>
+                                </p>
+                            </c:if>
+                            <c:if test="${not empty item.mainDish}">
+                                <p>
+                                    <c:out value="${item.mainDish}"/>
+                                </p>
+                            </c:if>
+                            <c:if test="${not empty item.dessert}">
+                                <p>
+                                    <c:out value="${item.dessert}"/>
+                                </p>
+                            </c:if>
+                        </div>
+                    </c:forEach>
                 </div>
             </div>
         </div>

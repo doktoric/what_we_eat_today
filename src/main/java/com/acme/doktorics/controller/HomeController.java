@@ -50,13 +50,13 @@ public class HomeController {
     public String home(Model model) throws IOException {
         logger.info("Start webapp");
 
-        model.addAttribute("fiktiv",fiktivService.findOne());
-        model.addAttribute("stex",stexService.findOne());
-        model.addAttribute("tenminutes",tenMinutesService.findOne());
-        model.addAttribute("kompot",kompotService.findOne());
+        model.addAttribute("fiktiv", fiktivService.getMenu());
+        model.addAttribute("stex",stexService.getMenu());
+        model.addAttribute("tenminutes",tenMinutesService.getMenu());
+        model.addAttribute("kompot",kompotService.getMenu());
         //fiktivService.saveRestaurant(testFiktiv());
-        //stexService.saveRestaurant(testStex());
-        //tenMinutesService.saveRestaurant(testTenMinutes());
+        // stexService.saveRestaurant(testStex());
+        // tenMinutesService.saveRestaurant(testTenMinutes());
         //kompotService.saveRestaurant(testKompot());
         return "home";
     }

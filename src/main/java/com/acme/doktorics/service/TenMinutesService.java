@@ -1,7 +1,9 @@
 package com.acme.doktorics.service;
 
 import com.acme.doktorics.dao.ITenMinutesDao;
+import com.acme.doktorics.domain.FiktivRestaurant;
 import com.acme.doktorics.domain.TenMinutesRestaurant;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +33,14 @@ public class TenMinutesService implements ITenMinutesService {
     @Override
     public TenMinutesRestaurant findOne() {
         return tenMinutesDao.findOne();
+    }
+
+    @Override
+    public String getMenu() {
+        TenMinutesRestaurant tenminutes=findOne();
+        Hibernate.initialize(tenminutes.getMenu());
+        byte[] menu= org.apache.commons.codec.binary.Base64.encodeBase64(tenminutes.getMenu());
+        return new String(menu);
     }
 
     @Override
