@@ -1,5 +1,6 @@
 package com.acme.doktorics.service;
 
+import com.acme.doktorics.domain.DailyMenu;
 import com.acme.doktorics.domain.TenMinutesRestaurant;
 
 import java.util.List;

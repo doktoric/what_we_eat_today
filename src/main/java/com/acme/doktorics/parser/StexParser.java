@@ -26,7 +26,7 @@ public class StexParser extends AbstractRestaurantParser {
             List<String> foods = new ArrayList<String>();
             Element nextFood = day.nextElementSibling();
             if (i == DAYS.length - 1) {
-                while (nextFood != null) {
+                while (nextFood != null && !nextFood.text().contains("A menü ára")) {
                     if (!isEmpty(nextFood)) {
                         foods.add(nextFood.text());
                     }

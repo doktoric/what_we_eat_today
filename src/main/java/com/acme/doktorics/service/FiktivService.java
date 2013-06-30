@@ -1,14 +1,16 @@
 package com.acme.doktorics.service;
 
 import com.acme.doktorics.dao.IFiktivDao;
-import com.acme.doktorics.domain.ClubCaffeRestaurant;
 import com.acme.doktorics.domain.DailyMenu;
+import com.acme.doktorics.domain.DailyMenuComparator;
 import com.acme.doktorics.domain.FiktivRestaurant;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -38,9 +40,30 @@ public class FiktivService implements IFiktivService {
 
     @Override
     public List<DailyMenu> getMenu() {
-        FiktivRestaurant fiktiv=findOne();
-        Hibernate.initialize(fiktiv.getMenu());
-        return fiktiv.getMenu();
+        FiktivRestaurant fiktiv = findOne();
+        if (fiktiv != null) {
+            Hibernate.initialize(fiktiv.getMenu());
+            Collections.sort(fiktiv.getMenu(), new DailyMenuComparator());
+            return fiktiv.getMenu();
+        }
+        return new ArrayList<DailyMenu>();
+    }
+
+    @Override
+    public void saveNewMenu(DailyMenu menu) {
+        FiktivRestaurant fiktiv = findOne();
+        if (fiktiv != null) {
+            Hibernate.initialize(fiktiv.getMenu());
+        }
+        for(int i=0;i<fiktiv.getMenu().size();i++){
+            if(menu.getDay().equals(fiktiv.getMenu().get(i).getDay())){
+                fiktiv.getMenu().remove(i);
+                i--;
+                break;
+            }
+        }
+        fiktiv.addMenu(menu);
+        saveRestaurant(fiktiv);
     }
 
     @Override

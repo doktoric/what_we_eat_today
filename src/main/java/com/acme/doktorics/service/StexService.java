@@ -1,14 +1,15 @@
 package com.acme.doktorics.service;
 
 import com.acme.doktorics.dao.IStexDao;
+import com.acme.doktorics.domain.ClubCaffeRestaurant;
 import com.acme.doktorics.domain.DailyMenu;
-import com.acme.doktorics.domain.FiktivRestaurant;
 import com.acme.doktorics.domain.StexRestaurant;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,9 +39,29 @@ public class StexService implements IStexService {
 
     @Override
     public List<DailyMenu> getMenu() {
-        StexRestaurant stex=findOne();
-        Hibernate.initialize(stex.getMenu());
-        return stex.getMenu();
+        StexRestaurant stex = findOne();
+        if (stex != null) {
+            Hibernate.initialize(stex.getMenu());
+            return stex.getMenu();
+        }
+        return new ArrayList<DailyMenu>();
+    }
+
+    @Override
+    public void saveNewMenu(DailyMenu menu) {
+        StexRestaurant stexRestaurant = findOne();
+        if (stexRestaurant != null) {
+            Hibernate.initialize(stexRestaurant.getMenu());
+        }
+        for(int i=0;i<stexRestaurant.getMenu().size();i++){
+            if(menu.getDay().equals(stexRestaurant.getMenu().get(i).getDay())){
+                stexRestaurant.getMenu().remove(i);
+                i--;
+                break;
+            }
+        }
+        stexRestaurant.addMenu(menu);
+        saveRestaurant(stexRestaurant);
     }
 
     @Override

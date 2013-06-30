@@ -24,7 +24,7 @@ public class FiktivParser extends AbstractRestaurantParser {
         Elements elements = this.getDocument().select(".htmltext");
         for (int i = 0; i < DAYS.length; i++) {
             Element day = elements.select("p:contains(" + DAYS[i] + ")").first();
-            Element appetizer = day.nextElementSibling();
+            Element appetizer = day.nextElementSibling().nextElementSibling();
             Element mainDish = appetizer.nextElementSibling();
 
             DailyMenu menu = new DailyMenu.Builder()

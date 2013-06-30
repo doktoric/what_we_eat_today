@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="1.0"
 	xmlns="http://java.sun.com/xml/ns/persistence">
-	<persistence-unit name="persistenceUnit"
-		transaction-type="RESOURCE_LOCAL">
+	<persistence-unit name="persistenceUnit"      		transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<properties>
-			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/lunch" />
+
+        <properties>
+            <property name="connection.url" value="jdbc:mysql://localhost:3306/lunch?useUnicode=true&amp;characterEncoding=utf-8" />
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/lunch"/>
 			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
-			<property name="hibernate.connection.password" value="" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+         	<property name="hibernate.connection.password" value="" />
 			<property name="hibernate.connection.username" value="root" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.show.sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
 
-		
 		</properties>
 	</persistence-unit>
 </persistence>

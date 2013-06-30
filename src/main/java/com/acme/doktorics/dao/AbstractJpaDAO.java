@@ -14,7 +14,7 @@ public class AbstractJpaDAO<T> implements IAbstractJpaDAO<T> {
     @Override
     public void setClazz(final Class<T> clazzToSet) {
         this.clazz = clazzToSet;
-}
+    }
 
     @Override
     public T findOne(final Long id) {
@@ -31,12 +31,16 @@ public class AbstractJpaDAO<T> implements IAbstractJpaDAO<T> {
 
     @Override
     public T findOne(String id) {
-        return findOne( Long.parseLong(id));
+        return findOne(Long.parseLong(id));
     }
 
     @Override
     public T findOne() {
-        return findAll().get(0);
+        List<T> results = findAll();
+        if (results.size() == 0) {
+            return null;
+        }
+        return results.get(0);
     }
 
     @Override
@@ -56,7 +60,7 @@ public class AbstractJpaDAO<T> implements IAbstractJpaDAO<T> {
 
     @Override
     public void truncate() {
-        for(T t: findAll()){
+        for (T t : findAll()) {
             delete(t);
         }
     }

@@ -21,6 +21,8 @@ public interface IStexService {
 
     List<DailyMenu> getMenu();
 
+    public void saveNewMenu(DailyMenu menu);
+
     void deleteRestaurant(String id);
 
     void saveRestaurant(StexRestaurant restaurant);

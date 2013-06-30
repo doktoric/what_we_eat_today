@@ -44,6 +44,23 @@ public class ClubCaffeService implements IClubCaffeService {
     }
 
     @Override
+    public void saveNewMenu(DailyMenu menu) {
+        ClubCaffeRestaurant clubCaffeRestaurant = findOne();
+        if (clubCaffeRestaurant != null) {
+            Hibernate.initialize(clubCaffeRestaurant.getMenu());
+        }
+        for(int i=0;i<clubCaffeRestaurant.getMenu().size();i++){
+            if(menu.getDay().equals(clubCaffeRestaurant.getMenu().get(i).getDay())){
+                clubCaffeRestaurant.getMenu().remove(i);
+                i--;
+                break;
+            }
+        }
+        clubCaffeRestaurant.addMenu(menu);
+        saveRestaurant(clubCaffeRestaurant);
+    }
+
+    @Override
     public void truncate() {
         clubCaffeDao.truncate();
     }

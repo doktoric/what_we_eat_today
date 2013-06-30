@@ -1,5 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@taglib tagdir="/WEB-INF/tags"  prefix="my" %>
+
 <%@page contentType="text/html;charset=UTF-8" %>
 
 <c:url value="/resources" var="resource"/>
@@ -25,7 +27,25 @@
     </style>
 </head>
 <body data-twttr-rendered="true" style="padding-top: 0px;">
-
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="./">Bootstrap</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li class="">
+                        <a href="./edit">Edit</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="jumbotron masthead">
     <div class="container">
         <h1>What we eat today</h1>
@@ -46,24 +66,7 @@
                 <div class="page-header">
                     <h1>Kompót étlap</h1>
                     <c:forEach var="item" items="${kompot}">
-                        <div class="alert alert-info">
-                            <strong><c:out value="${item.day}"/></strong>
-                            <c:if test="${not empty item.appetizer}">
-                                <p>
-                                    <c:out value="${item.appetizer}"/>
-                                </p>
-                            </c:if>
-                            <c:if test="${not empty item.mainDish}">
-                                <p>
-                                    <c:out value="${item.mainDish}"/>
-                                </p>
-                            </c:if>
-                            <c:if test="${not empty item.dessert}">
-                                <p>
-                                    <c:out value="${item.dessert}"/>
-                                </p>
-                            </c:if>
-                        </div>
+                        <my:menu item="${item}"></my:menu>
                     </c:forEach>
                 </div>
             </div>
@@ -71,24 +74,7 @@
                 <div class="page-header">
                     <h1>Fiktív étlap</h1>
                     <c:forEach var="item" items="${fiktiv}">
-                        <div class="alert alert-info">
-                            <strong><c:out value="${item.day}"/></strong>
-                            <c:if test="${not empty item.appetizer}">
-                                <p>
-                                    <c:out value="${item.appetizer}"/>
-                                </p>
-                            </c:if>
-                            <c:if test="${not empty item.mainDish}">
-                                <p>
-                                    <c:out value="${item.mainDish}"/>
-                                </p>
-                            </c:if>
-                            <c:if test="${not empty item.dessert}">
-                                <p>
-                                    <c:out value="${item.dessert}"/>
-                                </p>
-                            </c:if>
-                        </div>
+                        <my:menu item="${item}"></my:menu>
                     </c:forEach>
                 </div>
             </div>
@@ -108,24 +94,7 @@
                 <div class="page-header">
                     <h1>Stex étlap</h1>
                     <c:forEach var="item" items="${stex}">
-                        <div class="alert alert-info">
-                            <strong><c:out value="${item.day}"/></strong>
-                            <c:if test="${not empty item.appetizer}">
-                                <p>
-                                    <c:out value="${item.appetizer}"/>
-                                </p>
-                            </c:if>
-                            <c:if test="${not empty item.mainDish}">
-                                <p>
-                                    <c:out value="${item.mainDish}"/>
-                                </p>
-                            </c:if>
-                            <c:if test="${not empty item.dessert}">
-                                <p>
-                                    <c:out value="${item.dessert}"/>
-                                </p>
-                            </c:if>
-                        </div>
+                        <my:menu item="${item}"></my:menu>
                     </c:forEach>
                 </div>
             </div>

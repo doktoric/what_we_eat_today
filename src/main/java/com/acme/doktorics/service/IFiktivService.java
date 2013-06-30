@@ -23,6 +23,8 @@ public interface IFiktivService {
 
     void deleteRestaurant(String id);
 
+    public void saveNewMenu(DailyMenu menu);
+
     void saveRestaurant(FiktivRestaurant restaurant);
 
     void truncate();

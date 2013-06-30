@@ -11,14 +11,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
+
+import static com.acme.doktorics.parser.AbstractRestaurantParser.DAYS;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
-@RequestMapping(value = "/")
 public class HomeController {
 
 
@@ -46,20 +48,64 @@ public class HomeController {
     /**
      * Simply selects the home view to render by returning its name.
      */
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(Model model) throws IOException {
         logger.info("Start webapp");
 
-        model.addAttribute("fiktiv", fiktivService.getMenu());
-        model.addAttribute("stex",stexService.getMenu());
-        model.addAttribute("tenminutes",tenMinutesService.getMenu());
-        model.addAttribute("kompot",kompotService.getMenu());
         //fiktivService.saveRestaurant(testFiktiv());
-        // stexService.saveRestaurant(testStex());
-        // tenMinutesService.saveRestaurant(testTenMinutes());
+        //stexService.saveRestaurant(testStex());
+        //tenMinutesService.saveRestaurant(testTenMinutes());
         //kompotService.saveRestaurant(testKompot());
+
+        model.addAttribute("fiktiv", fiktivService.getMenu());
+        model.addAttribute("stex", stexService.getMenu());
+        model.addAttribute("tenminutes", tenMinutesService.getMenu());
+        model.addAttribute("kompot", kompotService.getMenu());
+
         return "home";
     }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    public String editGet(Model model) throws IOException {
+        logger.info("Start webapp");
+        model.addAttribute("restaurants", Restaurant.values());
+        model.addAttribute("days", DAYS);
+
+        return "edit";
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String editPost1(HttpServletRequest request) throws IOException {
+        logger.info("Start webapp");
+        request.setCharacterEncoding("UTF-8");
+        Restaurant restaurant = Restaurant.getRestaurantByName(request.getParameter("restaurant"));
+
+        String day = request.getParameter("day");
+        String appetizer = request.getParameter("appetizer");
+        String mainDish = request.getParameter("mainDish");
+        String dessert = request.getParameter("dessert");
+
+        DailyMenu menu = new DailyMenu.Builder()
+                .withDay(day)
+                .withDessert(dessert)
+                .withMainDish(mainDish)
+                .withAppetizer(appetizer)
+                .build();
+
+        if (Restaurant.FIKTIV.equals(restaurant)) {
+            fiktivService.saveNewMenu(menu);
+        } else if (Restaurant.STEX.equals(restaurant)) {
+            stexService.saveNewMenu(menu);
+        } else if (Restaurant.CLUBCAFFE.equals(restaurant)) {
+            clubCaffeService.saveNewMenu(menu);
+        } else if (Restaurant.KOMPOT.equals(restaurant)) {
+            kompotService.saveNewMenu(menu);
+        } else if (Restaurant.TENMINUTES.equals(restaurant)) {
+            logger.info("Not supported...");
+        }
+        return "home";
+    }
+
 
     public FiktivRestaurant testFiktiv() throws IOException {
         fiktivService.truncate();

@@ -16,7 +16,7 @@ import java.util.List;
  */
 public abstract class AbstractRestaurantParser implements BaseRestaurantParser {
 
-    protected String[] DAYS = {"Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek"};
+    public static String[] DAYS = {"Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek"};
     protected String[] SOUP = {"Leves", "leves", "LEVES"};
 
     protected Document getDocument() throws IOException {

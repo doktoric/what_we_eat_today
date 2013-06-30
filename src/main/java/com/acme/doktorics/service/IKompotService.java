@@ -21,6 +21,8 @@ public interface IKompotService {
 
     List<DailyMenu> getMenu();
 
+    public void saveNewMenu(DailyMenu menu);
+
     void deleteRestaurant(String id);
 
     void saveRestaurant(KompotRestaurant restaurant);
