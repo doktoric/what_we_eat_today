@@ -1,9 +1,11 @@
 package com.acme.doktorics.parser;
 
+import com.acme.doktorics.domain.DailyMenu;
 import com.acme.doktorics.domain.Restaurant;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,7 +19,7 @@ public class ClubCaffeParser extends AbstractRestaurantParser {
     @Override
     public Object getMenu() throws IOException {
 
-        return null;
+        return new ArrayList<DailyMenu>();
     }
 
     @Override
