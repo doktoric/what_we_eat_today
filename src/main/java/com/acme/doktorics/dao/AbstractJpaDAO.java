@@ -1,6 +1,8 @@
 package com.acme.doktorics.dao;
 
 
+import com.acme.doktorics.domain.AbstractRestaurant;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;

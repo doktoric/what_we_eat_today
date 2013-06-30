@@ -1,6 +1,7 @@
 package com.acme.doktorics.service;
 
 import com.acme.doktorics.dao.IFiktivDao;
+import com.acme.doktorics.domain.ClubCaffeRestaurant;
 import com.acme.doktorics.domain.DailyMenu;
 import com.acme.doktorics.domain.DailyMenuComparator;
 import com.acme.doktorics.domain.FiktivRestaurant;
@@ -51,19 +52,27 @@ public class FiktivService implements IFiktivService {
 
     @Override
     public void saveNewMenu(DailyMenu menu) {
-        FiktivRestaurant fiktiv = findOne();
-        if (fiktiv != null) {
-            Hibernate.initialize(fiktiv.getMenu());
+        FiktivRestaurant restaurant = findOne();
+        if (restaurant != null) {
+            Hibernate.initialize(restaurant.getMenu());
+        }   else{
+            restaurant=new FiktivRestaurant();
         }
-        for(int i=0;i<fiktiv.getMenu().size();i++){
-            if(menu.getDay().equals(fiktiv.getMenu().get(i).getDay())){
-                fiktiv.getMenu().remove(i);
+        for (int i = 0; i < restaurant.getMenu().size(); i++) {
+            if (menu.getDay().equals(restaurant.getMenu().get(i).getDay())) {
+                restaurant.getMenu().remove(i);
+                i--;
+                break;
+            } else if (menu.getDay().equals("Hétf?")) {
+                Collections.sort(restaurant.getMenu(), new DailyMenuComparator());
+                restaurant.getMenu().remove(i);
                 i--;
                 break;
             }
+
         }
-        fiktiv.addMenu(menu);
-        saveRestaurant(fiktiv);
+        restaurant.addMenu(menu);
+        saveRestaurant(restaurant);
     }
 
     @Override

@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -48,9 +49,8 @@ public class HomeController {
     /**
      * Simply selects the home view to render by returning its name.
      */
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = {"/","/home"}, method = RequestMethod.GET)
     public String home(Model model) throws IOException {
-        logger.info("Start webapp");
 
         //fiktivService.saveRestaurant(testFiktiv());
         //stexService.saveRestaurant(testStex());
@@ -61,13 +61,13 @@ public class HomeController {
         model.addAttribute("stex", stexService.getMenu());
         model.addAttribute("tenminutes", tenMinutesService.getMenu());
         model.addAttribute("kompot", kompotService.getMenu());
+        model.addAttribute("clubcaffe", clubCaffeService.getMenu());
 
         return "home";
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public String editGet(Model model) throws IOException {
-        logger.info("Start webapp");
         model.addAttribute("restaurants", Restaurant.values());
         model.addAttribute("days", DAYS);
 
@@ -76,7 +76,6 @@ public class HomeController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String editPost1(HttpServletRequest request) throws IOException {
-        logger.info("Start webapp");
         request.setCharacterEncoding("UTF-8");
         Restaurant restaurant = Restaurant.getRestaurantByName(request.getParameter("restaurant"));
 
@@ -103,7 +102,30 @@ public class HomeController {
         } else if (Restaurant.TENMINUTES.equals(restaurant)) {
             logger.info("Not supported...");
         }
-        return "home";
+        return "redirect:/home";
+    }
+
+    @RequestMapping(value = "/runner", method = RequestMethod.GET)
+    public String runnerGet(Model model) throws IOException {
+        model.addAttribute("restaurants", Restaurant.values());
+
+        return "runner";
+    }
+
+    @RequestMapping(value = "/runner/{restaurant}", method = RequestMethod.POST)
+    public String runnerPost(@PathVariable String restaurant) throws IOException {
+        if (Restaurant.FIKTIV.getName().equals(restaurant)) {
+            fiktivService.saveRestaurant(testFiktiv());
+        } else if (Restaurant.STEX.getName().equals(restaurant)) {
+            stexService.saveRestaurant(testStex());
+        } else if (Restaurant.CLUBCAFFE.getName().equals(restaurant)) {
+            //clubCaffeService.saveNewMenu(restaurant);
+        } else if (Restaurant.KOMPOT.getName().equals(restaurant)) {
+            kompotService.saveRestaurant(testKompot());
+        } else if (Restaurant.TENMINUTES.getName().equals(restaurant)) {
+            tenMinutesService.saveRestaurant(testTenMinutes());
+        }
+        return "redirect:/home";
     }
 
 

@@ -1,15 +1,14 @@
 package com.acme.doktorics.service;
 
 import com.acme.doktorics.dao.IStexDao;
-import com.acme.doktorics.domain.ClubCaffeRestaurant;
-import com.acme.doktorics.domain.DailyMenu;
-import com.acme.doktorics.domain.StexRestaurant;
+import com.acme.doktorics.domain.*;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -42,6 +41,7 @@ public class StexService implements IStexService {
         StexRestaurant stex = findOne();
         if (stex != null) {
             Hibernate.initialize(stex.getMenu());
+            Collections.sort(stex.getMenu(), new DailyMenuComparator());
             return stex.getMenu();
         }
         return new ArrayList<DailyMenu>();
@@ -49,19 +49,26 @@ public class StexService implements IStexService {
 
     @Override
     public void saveNewMenu(DailyMenu menu) {
-        StexRestaurant stexRestaurant = findOne();
-        if (stexRestaurant != null) {
-            Hibernate.initialize(stexRestaurant.getMenu());
+        StexRestaurant restaurant = findOne();
+        if (restaurant != null) {
+            Hibernate.initialize(restaurant.getMenu());
+        }   else{
+            restaurant=new StexRestaurant();
         }
-        for(int i=0;i<stexRestaurant.getMenu().size();i++){
-            if(menu.getDay().equals(stexRestaurant.getMenu().get(i).getDay())){
-                stexRestaurant.getMenu().remove(i);
+        for(int i=0;i<restaurant.getMenu().size();i++){
+            if(menu.getDay().equals(restaurant.getMenu().get(i).getDay())){
+                restaurant.getMenu().remove(i);
+                i--;
+                break;
+            }else if (menu.getDay().equals("Hétf?")) {
+                Collections.sort(restaurant.getMenu(), new DailyMenuComparator());
+                restaurant.getMenu().remove(i);
                 i--;
                 break;
             }
         }
-        stexRestaurant.addMenu(menu);
-        saveRestaurant(stexRestaurant);
+        restaurant.addMenu(menu);
+        saveRestaurant(restaurant);
     }
 
     @Override

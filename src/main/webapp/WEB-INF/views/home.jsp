@@ -41,6 +41,9 @@
                     <li class="">
                         <a href="./edit">Edit</a>
                     </li>
+                    <li class="">
+                        <a href="./runner">Run</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -81,6 +84,9 @@
             <div class="tab-pane" id="klubcaffe">
                 <div class="page-header">
                     <h1>Club Caffe étlap</h1>
+                    <c:forEach var="item" items="${clubcaffe}">
+                        <my:menu item="${item}"></my:menu>
+                    </c:forEach>
                 </div>
             </div>
             <div class="tab-pane" id="tenminutes">

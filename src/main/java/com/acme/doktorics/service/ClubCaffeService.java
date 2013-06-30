@@ -3,12 +3,14 @@ package com.acme.doktorics.service;
 import com.acme.doktorics.dao.IClubCaffeDao;
 import com.acme.doktorics.domain.ClubCaffeRestaurant;
 import com.acme.doktorics.domain.DailyMenu;
+import com.acme.doktorics.domain.DailyMenuComparator;
 import com.acme.doktorics.domain.FiktivRestaurant;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -40,24 +42,34 @@ public class ClubCaffeService implements IClubCaffeService {
     public List<DailyMenu> getMenu() {
         ClubCaffeRestaurant clubcaffe=findOne();
         Hibernate.initialize(clubcaffe.getMenu());
+        Collections.sort(clubcaffe.getMenu(), new DailyMenuComparator());
         return clubcaffe.getMenu();
     }
 
     @Override
     public void saveNewMenu(DailyMenu menu) {
-        ClubCaffeRestaurant clubCaffeRestaurant = findOne();
-        if (clubCaffeRestaurant != null) {
-            Hibernate.initialize(clubCaffeRestaurant.getMenu());
+        ClubCaffeRestaurant restaurant = findOne();
+        if (restaurant != null) {
+            Hibernate.initialize(restaurant.getMenu());
+        }else{
+            restaurant=new ClubCaffeRestaurant();
         }
-        for(int i=0;i<clubCaffeRestaurant.getMenu().size();i++){
-            if(menu.getDay().equals(clubCaffeRestaurant.getMenu().get(i).getDay())){
-                clubCaffeRestaurant.getMenu().remove(i);
+
+        for (int i = 0; i < restaurant.getMenu().size(); i++) {
+            if (menu.getDay().equals(restaurant.getMenu().get(i).getDay())) {
+                restaurant.getMenu().remove(i);
+                i--;
+                break;
+            } else if (menu.getDay().equals("Hétf?")) {
+                Collections.sort(restaurant.getMenu(), new DailyMenuComparator());
+                restaurant.getMenu().remove(i);
                 i--;
                 break;
             }
+
         }
-        clubCaffeRestaurant.addMenu(menu);
-        saveRestaurant(clubCaffeRestaurant);
+        restaurant.addMenu(menu);
+        saveRestaurant(restaurant);
     }
 
     @Override
